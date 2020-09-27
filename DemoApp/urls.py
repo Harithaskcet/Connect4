@@ -20,6 +20,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name="home"),
     path('reset/', home, name="home"),
-    path('start/<str:player1>/<str:player2>', createUser, name="createUser"),
-    path('update/<int:row>/<int:col>', update, name="update"),
+    path('start/<str:player1>/<str:player2>/', createUser, name="createUser"),
+    path('update/<int:row>/<int:col>/', update, name="update"),
 ]
