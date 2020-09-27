@@ -60,6 +60,8 @@ def update(request, row, col):
         userB = get_object_or_404(Connect, user=playerB)
         mat = userA.grid 
         if player == 1:
+            playerA = playerA
+            playerB = PlayerB
             for x in range(5,-1,-1):
                 print(mat[x][col])
                 if mat[x][col] == 0:
@@ -104,6 +106,8 @@ def update(request, row, col):
                 'PlayerA':userA.user,
                 'PlayerB':playerB })
         else:
+            playerA = playerA
+            playerB = PlayerB
             for x in range(5,-1,-1):
                 if mat[x][col] == 0:
                     mat[x][col] = 2
