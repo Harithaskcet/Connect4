@@ -68,6 +68,8 @@ def update(request, row, col, playerA, playerB):
                     userA.grid = mat
                     userB.grid = mat
                     player = 2
+                    print("player role")
+                    print(player)
                     userA.save()
                     userB.save()
                     print(userA.grid)
@@ -111,6 +113,8 @@ def update(request, row, col, playerA, playerB):
                     userA.grid = mat
                     userB.grid = mat
                     player = 1
+                    print("player role")
+                    print(player)
                     userA.save()
                     userB.save()
                     print(userB.moves)
