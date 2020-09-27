@@ -8,48 +8,49 @@ def home(request):
     return render(request,'GetUser.html')
 
 def createUser(request, player1, player2):
-    global player, playerA, playerB
-    player = 1
-    playerA = player1
-    playerB = player2
-    userList = Connect.objects
-    users = [player1, player2]
-    for user in users:
-        if userList.filter(userName=user).exists():
-            userDetail = get_object_or_404(Connect, userName=user)
-            print(userDetail)
-            userDetail.moves = []
-            grid = []
-            for i in range(0,6):
-                arr = []
-                for j in range(0,7):
-                    arr.append(0)
-                grid.append(arr)
-            userDetail.grid = grid
-            userDetail.save()
-        else:
-            player = Connect()
-            player.userName = user
-            player.moves = []
-            grid = []
-            for i in range(0,6):
-                arr = []
-                for j in range(0,7):
-                    arr.append(0)
-                grid.append(arr)
-            player.grid = grid
-            player.save()
-    userA = get_object_or_404(Connect, userName=player1)
-    print(userA.grid)
-    return render(request,'GamePlay.html', { 
-        'checks': userA.grid,
-        'row': [0,1,2,3,4,5],
-        'col':[0,1,2,3,4,5,6],
-        'turn': 'Yellow Turn',
-        'Amoves':[],
-        'Bmoves': [],
-        'PlayerA': userA.userName,
-        'PlayerB': player2 })
+    if request.method == 'GET' or request.method == 'POST':
+        global player, playerA, playerB
+        player = 1
+        playerA = player1
+        playerB = player2
+        userList = Connect.objects
+        users = [player1, player2]
+        for user in users:
+            if userList.filter(userName=user).exists():
+                userDetail = get_object_or_404(Connect, userName=user)
+                print(userDetail)
+                userDetail.moves = []
+                grid = []
+                for i in range(0,6):
+                    arr = []
+                    for j in range(0,7):
+                        arr.append(0)
+                    grid.append(arr)
+                userDetail.grid = grid
+                userDetail.save()
+            else:
+                player = Connect()
+                player.userName = user
+                player.moves = []
+                grid = []
+                for i in range(0,6):
+                    arr = []
+                    for j in range(0,7):
+                        arr.append(0)
+                    grid.append(arr)
+                player.grid = grid
+                player.save()
+        userA = get_object_or_404(Connect, userName=player1)
+        print(userA.grid)
+        return render(request,'GamePlay.html', { 
+            'checks': userA.grid,
+            'row': [0,1,2,3,4,5],
+            'col':[0,1,2,3,4,5,6],
+            'turn': 'Yellow Turn',
+            'Amoves':[],
+            'Bmoves': [],
+            'PlayerA': userA.userName,
+            'PlayerB': player2 })
 
 def update(request, row, col):
     if request.method == 'GET' or request.method == 'POST':
