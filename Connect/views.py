@@ -16,8 +16,8 @@ def createUser(request, player1, player2):
         userList = Connect.objects
         users = [player1, player2]
         for user in users:
-            if userList.filter(userName=user).exists():
-                userDetail = get_object_or_404(Connect, userName=user)
+            if userList.filter(user=user).exists():
+                userDetail = get_object_or_404(Connect, user=user)
                 print(userDetail)
                 userDetail.moves = []
                 grid = []
@@ -30,7 +30,7 @@ def createUser(request, player1, player2):
                 userDetail.save()
             else:
                 player = Connect()
-                player.userName = user
+                player.user = user
                 player.moves = []
                 grid = []
                 for i in range(0,6):
@@ -40,7 +40,7 @@ def createUser(request, player1, player2):
                     grid.append(arr)
                 player.grid = grid
                 player.save()
-        userA = get_object_or_404(Connect, userName=player1)
+        userA = get_object_or_404(Connect, user=player1)
         print(userA.grid)
         return render(request,'GamePlay.html', { 
             'checks': userA.grid,
@@ -49,15 +49,15 @@ def createUser(request, player1, player2):
             'turn': 'Yellow Turn',
             'Amoves':[],
             'Bmoves': [],
-            'PlayerA': userA.userName,
+            'PlayerA': userA.user,
             'PlayerB': player2 })
 
 def update(request, row, col):
     if request.method == 'GET' or request.method == 'POST':
         global player, playerA, playerB
         print(player, playerA, playerB)
-        userA = get_object_or_404(Connect, userName=playerA)
-        userB = get_object_or_404(Connect, userName=playerB)
+        userA = get_object_or_404(Connect, user=playerA)
+        userB = get_object_or_404(Connect, user=playerB)
         mat = userA.grid 
         if player == 1:
             for x in range(5,-1,-1):
@@ -81,7 +81,7 @@ def update(request, row, col):
                             'turn': 'Yellow Won!',
                             'Amoves':move,
                             'Bmoves':userB.moves,
-                            'PlayerA':userA.userName,
+                            'PlayerA':userA.user,
                             'PlayerB':playerB })
                     else:
                         return render(request, 'GamePlay.html', {
@@ -91,7 +91,7 @@ def update(request, row, col):
                             'turn': 'Red Turn',
                             'Amoves':move,
                             'Bmoves':userB.moves,
-                            'PlayerA':userA.userName,
+                            'PlayerA':userA.user,
                             'PlayerB': playerB  })
             return render(request, 'GamePlay.html', {
                 'checks': userA.grid,
@@ -101,7 +101,7 @@ def update(request, row, col):
                 'error': 'Invalid Move',
                 'Amoves':userA.moves,
                 'Bmoves':userB.moves,
-                'PlayerA':userA.userName,
+                'PlayerA':userA.user,
                 'PlayerB':playerB })
         else:
             for x in range(5,-1,-1):
@@ -124,7 +124,7 @@ def update(request, row, col):
                             'turn': 'Red Won!',
                             'Amoves':userA.moves,
                             'Bmoves':move,
-                            'PlayerA':userA.userName,
+                            'PlayerA':userA.user,
                             'PlayerB':playerB })
                     else:
                         return render(request, 'GamePlay.html', {
@@ -134,7 +134,7 @@ def update(request, row, col):
                             'turn': 'Yellow Turn',
                             'Amoves':userA.moves,
                             'Bmoves':move,
-                            'PlayerA':userA.userName,
+                            'PlayerA':userA.user,
                             'PlayerB':playerB  })
             return render(request, 'GamePlay.html', {
                 'checks': userA.grid,
@@ -144,7 +144,7 @@ def update(request, row, col):
                 'error': 'Invalid Move',
                 'Amoves':userA.moves,
                 'Bmoves':userB.moves,
-                'PlayerA':userA.userName,
+                'PlayerA':userA.user,
                 'PlayerB':playerB  })
 
 def search2D(grid, row, col, word): 
