@@ -21,5 +21,5 @@ urlpatterns = [
     path('', home, name="home"),
     path('reset/', home, name="home"),
     path('start/<str:player1>/<str:player2>/', createUser, name="createUser"),
-    path('update/<int:row>/<int:col>/', update, name="update"),
+    path('update/<int:row>/<int:col>/<str:playerA>/<str:playerB>/', update, name="update"),
 ]

@@ -2,8 +2,6 @@ from django.shortcuts import render, get_object_or_404
 from .models import Connect
 # Create your views here.
 player = 1
-playerA = ''
-playerB = ''
 def home(request):
     return render(request,'GetUser.html')
 
@@ -52,16 +50,14 @@ def createUser(request, player1, player2):
             'PlayerA': userA.user,
             'PlayerB': player2 })
 
-def update(request, row, col):
+def update(request, row, col, playerA, playerB):
     if request.method == 'GET' or request.method == 'POST':
-        global player, playerA, playerB
+        global player
         print(player, playerA, playerB)
         userA = get_object_or_404(Connect, user=playerA)
         userB = get_object_or_404(Connect, user=playerB)
         mat = userA.grid 
         if player == 1:
-            playerA = playerA
-            playerB = PlayerB
             for x in range(5,-1,-1):
                 print(mat[x][col])
                 if mat[x][col] == 0:
@@ -106,8 +102,6 @@ def update(request, row, col):
                 'PlayerA':userA.user,
                 'PlayerB':playerB })
         else:
-            playerA = playerA
-            playerB = PlayerB
             for x in range(5,-1,-1):
                 if mat[x][col] == 0:
                     mat[x][col] = 2

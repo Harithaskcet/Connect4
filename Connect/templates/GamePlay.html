@@ -92,10 +92,12 @@ H1 {
     </style>
     <script type="text/javascript">
       update = (row , col, turn) => {
+          let user1 = '{{PlayerA}}';
+          let user2 = '{{PlayerB}}';
           if(turn.includes('Won')) {
             return window.event.preventDefault();
           }
-          return window.location.href = "{% url 'update' 12345 789 %}".replace('12345', row).replace('789', col);
+          return window.location.href = "{% url 'update' 12345 789 86 89 %}".replace('12345', row).replace('789', col).replace('86', user1).replace('89', user2);
       }
   
       pickColor = () => {
