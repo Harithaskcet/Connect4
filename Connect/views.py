@@ -55,7 +55,7 @@ def createUser(request, player1, player2):
 def update(request, row, col):
     if request.method == 'GET' or request.method == 'POST':
         global player, playerB
-        print(player)
+        print(player, playerA, playerB)
         userA = get_object_or_404(Connect, userName=playerA)
         userB = get_object_or_404(Connect, userName=playerB)
         mat = userA.grid 
