@@ -121,7 +121,7 @@ def update(request, row, col):
                         'col':[0,1,2,3,4,5,6],
                         'turn': 'Red Won!',
                         'Amoves':userA.moves,
-                        'Bmoves':mat,
+                        'Bmoves':move,
                         'PlayerA':userA.userName,
                         'PlayerB':playerB })
                 else:
